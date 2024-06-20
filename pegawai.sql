@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 17 Bulan Mei 2020 pada 01.29
--- Versi server: 10.1.31-MariaDB
--- Versi PHP: 7.2.3
+-- Generation Time: Jun 20, 2024 at 04:39 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_pegawai`
+-- Database: `pegawai`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `absen`
+-- Table structure for table `absen`
 --
 
 CREATE TABLE `absen` (
@@ -36,10 +35,10 @@ CREATE TABLE `absen` (
   `tidak_hadir` int(100) NOT NULL,
   `bulan` int(100) NOT NULL,
   `tanggal` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data untuk tabel `absen`
+-- Dumping data for table `absen`
 --
 
 INSERT INTO `absen` (`id_absen`, `id_pegawai`, `hadir`, `izin`, `tidak_hadir`, `bulan`, `tanggal`) VALUES
@@ -48,7 +47,7 @@ INSERT INTO `absen` (`id_absen`, `id_pegawai`, `hadir`, `izin`, `tidak_hadir`, `
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `admin`
+-- Table structure for table `admin`
 --
 
 CREATE TABLE `admin` (
@@ -57,11 +56,11 @@ CREATE TABLE `admin` (
   `password` varchar(100) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `level` varchar(100) NOT NULL,
-  `log` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `log` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data untuk tabel `admin`
+-- Dumping data for table `admin`
 --
 
 INSERT INTO `admin` (`id_admin`, `username`, `password`, `nama`, `level`, `log`) VALUES
@@ -71,7 +70,7 @@ INSERT INTO `admin` (`id_admin`, `username`, `password`, `nama`, `level`, `log`)
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jabatan`
+-- Table structure for table `jabatan`
 --
 
 CREATE TABLE `jabatan` (
@@ -79,31 +78,23 @@ CREATE TABLE `jabatan` (
   `nama_jabatan` varchar(100) NOT NULL,
   `golongan` varchar(100) NOT NULL,
   `tunjangan` int(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data untuk tabel `jabatan`
+-- Dumping data for table `jabatan`
 --
 
 INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`, `golongan`, `tunjangan`) VALUES
-(5, 'Frontend Developer', 'Junior', 2500000),
-(6, 'Backend Developer', 'Junior', 2800000),
-(7, 'Database Admin', 'Senior', 5700000),
-(8, 'Frontend Developer', 'Middle', 5200000),
-(9, 'Backend Developer', 'Middle', 5500000),
-(10, 'Frontend Developer', 'Senior', 8550000),
-(11, 'Backend Developer', 'Senior', 9325700),
-(12, 'Staff IT', 'Senior', 3500000),
-(13, 'General Manager', '-', 12750000),
-(14, 'Network Engineer', 'Senior', 8500000),
-(15, 'Admin Server', 'Senior', 8750000),
-(16, 'Graphic Designer', 'Senior', 7500000),
-(17, 'Graphic Designer', 'Junior', 2200000);
+(5, 'Kepala Stasiun', 'Satu', 2500000),
+(6, 'PMG Penyelia', 'Satu', 2800000),
+(7, 'PMG Pertama', 'Satu', 5700000),
+(8, 'PMG Muda', 'Satu', 5200000),
+(9, 'Pelaksana Umum', 'Satu', 5500000);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pegawai`
+-- Table structure for table `pegawai`
 --
 
 CREATE TABLE `pegawai` (
@@ -119,21 +110,31 @@ CREATE TABLE `pegawai` (
   `alamat` varchar(100) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data untuk tabel `pegawai`
+-- Dumping data for table `pegawai`
 --
 
 INSERT INTO `pegawai` (`id_pegawai`, `id_jabatan`, `nip`, `nama`, `jk`, `foto`, `agama`, `pendidikan`, `status_kep`, `alamat`, `username`, `password`) VALUES
 (9, 10, '200108312018110801002', 'Adlu Bagus Irawan', 'L', 'foto_1588345007.jpg', 'islam', 'SMK RPL', 'Tetap', 'Jl Gatot Subroto VI F, Denpasar, Bali', 'adlubagusi', '827ccb0eea8a706c4c34a16891f84e7b'),
 (10, 15, '200012052018110801001', 'Hatsune Miku', 'P', 'foto_1589668962.jpg', 'lainnya', 'SMK RPL', 'Tetap', 'Tokyo, Japan', 'miku2255', '827ccb0eea8a706c4c34a16891f84e7b'),
-(11, 17, '200007152018110801003', 'Kizuna Ai', 'P', 'foto_1589669245.jpg', 'lainnya', 'SMK Multimedia', 'Magang', 'Sapporo, Japan', 'kizunaai_', '827ccb0eea8a706c4c34a16891f84e7b');
+(11, 17, '200007152018110801003', 'Kizuna Ai', 'P', 'foto_1589669245.jpg', 'lainnya', 'SMK Multimedia', 'Magang', 'Sapporo, Japan', 'kizunaai_', '827ccb0eea8a706c4c34a16891f84e7b'),
+(12, 5, '196804101991021001', 'Surya, S.Kom', 'L', '', 'islam', 'S1', 'Aktif', 'Lhoksuemawe', 'surya', 'aff8fbcbf1363cd7edc85a1e11391173'),
+(13, 6, '197507021999031001', 'Saifundi', 'L', '', 'islam', 'S1', 'Aktif', 'Lhoksuemawe', 'saifundi', 'ff236c5daa01f9a1ce6ad6c2f07793fc'),
+(14, 7, '19950520201410011001', 'Muhammad Imam Muatho, S.Tr', 'L', '', 'islam', 'D4', 'Aktif', 'Lhoksuemawe', 'Imam ', '1dea4e854db2aeae5b02bbdb82a8e4a1'),
+(15, 8, '199509182014111001', 'Arijuddin,S.Tr,M.P', 'L', '', 'islam', 'S2', 'Aktif', 'Lhoksuemawe', 'arijuddin', '8f9a2201d8acc47967528ec9f95fd570'),
+(16, 8, '198805122009111001', 'Kharendra Muiz, S.Si', 'L', '', 'islam', 'S1', 'Aktif', 'Lhoksuemawe', 'kharendra ', 'e04a8876565726b2f9b2b097b08265e1'),
+(17, 6, '198607192008121003', 'Muhammad Khamil Firdaus', 'L', '', 'islam', 'SMA', 'Aktif', 'Lhoksuemawe', 'khamil ', 'af59000a5bdda82087b4e655e8239475'),
+(18, 9, '198606052012121003', 'Hasan Basri', 'L', '', 'islam', 'SMA', 'Aktif', 'Lhoksuemawe', 'hasan', 'fc3f318fba8b3c1502bece62a27712df'),
+(19, 7, '199711212021061001', 'Marselinnus Muaya', 'L', '', 'islam', 'SMA', 'Aktif', 'Lhoksuemawe', 'marselinnus ', 'f9dfc1258a07b400907b585649c22a27'),
+(20, 7, '199502252013121001', 'Febriyanto Simanjuntak, S.Tr, M.SC', 'L', '', 'islam', 'S2', 'Aktif', 'Lhoksuemawe', 'febriyanto ', 'b1dd8c9c439ddd265875c94e94410686'),
+(21, 7, '199605012016011001', 'Ricky Nadiansyah, S.Tr, Met', 'L', '', 'islam', 'S1', 'Aktif', 'Lhoksuemawe', 'ricky ', '65ef5b187ccc81ec20d5aacca781f76e');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tpp`
+-- Table structure for table `tpp`
 --
 
 CREATE TABLE `tpp` (
@@ -144,10 +145,10 @@ CREATE TABLE `tpp` (
   `bulan_t` int(100) NOT NULL,
   `tahun` int(100) NOT NULL,
   `tgl` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data untuk tabel `tpp`
+-- Dumping data for table `tpp`
 --
 
 INSERT INTO `tpp` (`id_tpp`, `id_pegawai`, `jumlah_tpp`, `jumlah_potongan`, `bulan_t`, `tahun`, `tgl`) VALUES
@@ -160,65 +161,65 @@ INSERT INTO `tpp` (`id_tpp`, `id_pegawai`, `jumlah_tpp`, `jumlah_potongan`, `bul
 --
 
 --
--- Indeks untuk tabel `absen`
+-- Indexes for table `absen`
 --
 ALTER TABLE `absen`
   ADD PRIMARY KEY (`id_absen`);
 
 --
--- Indeks untuk tabel `admin`
+-- Indexes for table `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id_admin`);
 
 --
--- Indeks untuk tabel `jabatan`
+-- Indexes for table `jabatan`
 --
 ALTER TABLE `jabatan`
   ADD PRIMARY KEY (`id_jabatan`);
 
 --
--- Indeks untuk tabel `pegawai`
+-- Indexes for table `pegawai`
 --
 ALTER TABLE `pegawai`
   ADD PRIMARY KEY (`id_pegawai`);
 
 --
--- Indeks untuk tabel `tpp`
+-- Indexes for table `tpp`
 --
 ALTER TABLE `tpp`
   ADD PRIMARY KEY (`id_tpp`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `absen`
+-- AUTO_INCREMENT for table `absen`
 --
 ALTER TABLE `absen`
   MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT untuk tabel `admin`
+-- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
   MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `jabatan`
+-- AUTO_INCREMENT for table `jabatan`
 --
 ALTER TABLE `jabatan`
   MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT untuk tabel `pegawai`
+-- AUTO_INCREMENT for table `pegawai`
 --
 ALTER TABLE `pegawai`
-  MODIFY `id_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT untuk tabel `tpp`
+-- AUTO_INCREMENT for table `tpp`
 --
 ALTER TABLE `tpp`
   MODIFY `id_tpp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
